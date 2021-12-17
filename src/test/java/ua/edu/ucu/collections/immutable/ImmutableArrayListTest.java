@@ -49,8 +49,12 @@ public class ImmutableArrayListTest {
         arrayEmptyList = (ImmutableArrayList) arrayEmptyList.addAll(100, new Object[]{5, 5, 5, 5, 5});
         Assert.assertEquals("[5, 5, 5, 5, 5]", arrayEmptyList.toString());
 
+        arrayEmptyList = (ImmutableArrayList) arrayEmptyList.addAll(-1, new Object[]{3});
+        Assert.assertEquals("[5, 5, 5, 5, 5, 3]", arrayEmptyList.toString());
+
+
         arrayEmptyList = (ImmutableArrayList) arrayEmptyList.addAll(-100, new Object[]{3});
-        Assert.assertEquals("[3, 5, 5, 5, 5, 5]", arrayEmptyList.toString());
+        Assert.assertEquals("[3, 5, 5, 5, 5, 5, 3]", arrayEmptyList.toString());
 
     }
 
