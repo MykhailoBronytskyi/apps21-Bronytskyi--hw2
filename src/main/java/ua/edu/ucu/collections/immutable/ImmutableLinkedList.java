@@ -7,12 +7,12 @@ public final class ImmutableLinkedList implements ImmutableList {
     private final Node tail;
     private final int size;
 
-    private int NormaliseIndex(int index){
+    private int normaliseIndex(int index) {
 
-        if (index > this.size){
+        if (index > this.size) {
             return this.size;
 
-        } else if (index < 0){
+        } else if (index < 0) {
 
             int refactored_negative_index = this.size + index + 1;
             if (refactored_negative_index < 0) {
@@ -23,12 +23,12 @@ public final class ImmutableLinkedList implements ImmutableList {
         return index;
     }
 
-    private int CheckAndNormaliseIndex(int index){
+    private int checkAndNormaliseIndex(int index) {
 
-        if (index >= this.size){
+        if (index >= this.size) {
             throw new IllegalArgumentException("Index is too large");
 
-        } else if (index < 0){
+        } else if (index < 0) {
 
             int refactored_negative_index = this.size + index;
             if (refactored_negative_index < 0) {
@@ -39,20 +39,20 @@ public final class ImmutableLinkedList implements ImmutableList {
         return index;
     }
 
-    private Node getNodeByIndex(int index){
+    private Node getNodeByIndex(int index) {
         Node new_head = this.head;
-        for (int idx = 0; idx < index; idx++){
+        for (int idx = 0; idx < index; idx++) {
             new_head = new_head.getNext();
         }
         return new_head;
     }
 
-    private ImmutableLinkedList copy(){
+    private ImmutableLinkedList copy() {
         return new ImmutableLinkedList(this.toArray());
     }
 
     public ImmutableLinkedList(Object[] elements) {
-        if (elements.length == 0){
+        if (elements.length == 0) {
             this.head = null;
             this.tail = null;
             this.size = 0;
@@ -62,15 +62,15 @@ public final class ImmutableLinkedList implements ImmutableList {
         new_head.setValue(elements[0]);
         this.head = new_head;
 
-        for(int idx = 1; idx < elements.length; idx++) {
+        for (int idx = 1; idx < elements.length; idx++) {
             Object el = elements[idx];
 
-            Node previous_node = new Node();
-            previous_node.setValue(el);
-            previous_node.setNext(new_head);
+            Node next_node = new Node();
+            next_node.setValue(el);
+            next_node.setPrevious(new_head);
 
-            new_head.setNext(previous_node);
-            new_head = previous_node;
+            new_head.setNext(next_node);
+            new_head = next_node;
         }
         this.tail = new_head;
         this.size = elements.length;
@@ -100,7 +100,7 @@ public final class ImmutableLinkedList implements ImmutableList {
     @Override
     public ImmutableList addAll(int index, Object[] arr) {
 
-        index = this.NormaliseIndex(index);
+        index = this.normaliseIndex(index);
 
         int new_len = this.size + arr.length;
 
@@ -108,17 +108,17 @@ public final class ImmutableLinkedList implements ImmutableList {
         Node new_head = this.head;
 
         int idx = 0;
-        for (;idx < index; idx++){
+        for (; idx < index; idx++) {
             new_array[idx] = new_head.getValue();
             new_head = new_head.getNext();
         }
 
-        for (Object el : arr){
+        for (Object el : arr) {
             new_array[idx] = el;
             idx++;
         }
 
-        for (;idx < new_len; idx++){
+        for (; idx < new_len; idx++) {
             new_array[idx] = new_head.getValue();
             new_head = new_head.getNext();
         }
@@ -127,7 +127,7 @@ public final class ImmutableLinkedList implements ImmutableList {
 
     @Override
     public Object get(int index) {
-        int new_idx = this.CheckAndNormaliseIndex(index);
+        int new_idx = this.checkAndNormaliseIndex(index);
         Node new_head = getNodeByIndex(new_idx);
         return new_head.getValue();
     }
@@ -135,17 +135,17 @@ public final class ImmutableLinkedList implements ImmutableList {
     @Override
     public ImmutableList remove(int index) {
 
-        int new_idx = this.CheckAndNormaliseIndex(index);
+        int new_idx = this.checkAndNormaliseIndex(index);
         Object[] new_arr = new Object[this.size - 1];
         Node new_node = this.head;
 
-        for (int idx = 0; idx < new_idx; idx++){
+        for (int idx = 0; idx < new_idx; idx++) {
             new_arr[idx] = new_node.getValue();
             new_node = new_node.getNext();
         }
         new_node = new_node.getNext();
 
-        for (int idx = new_idx; idx < this.size - 1; idx++){
+        for (int idx = new_idx; idx < this.size - 1; idx++) {
             new_arr[idx] = new_node.getValue();
             new_node = new_node.getNext();
         }
@@ -155,7 +155,7 @@ public final class ImmutableLinkedList implements ImmutableList {
     @Override
     public ImmutableList set(int index, Object el) {
 
-        int new_idx = this.CheckAndNormaliseIndex(index);
+        int new_idx = this.checkAndNormaliseIndex(index);
 
         ImmutableLinkedList new_list = this.copy();
 
@@ -168,8 +168,8 @@ public final class ImmutableLinkedList implements ImmutableList {
     @Override
     public int indexOf(Object el) {
         Node new_head = this.head;
-        for (int idx = 0; idx < this.size; idx++){
-            if (el == new_head.getValue()){
+        for (int idx = 0; idx < this.size; idx++) {
+            if (el == new_head.getValue()) {
                 return idx;
             }
             new_head = new_head.getNext();
@@ -189,7 +189,7 @@ public final class ImmutableLinkedList implements ImmutableList {
 
     @Override
     public boolean isEmpty() {
-        return size == 0 ;
+        return size == 0;
     }
 
     @Override
@@ -198,7 +198,7 @@ public final class ImmutableLinkedList implements ImmutableList {
         Object[] new_array = new Object[this.size];
         Node new_head = this.head;
 
-        for (int idx = 0; idx < this.size; idx++){
+        for (int idx = 0; idx < this.size; idx++) {
             new_array[idx] = new_head.getValue();
             new_head = new_head.getNext();
         }
@@ -207,7 +207,7 @@ public final class ImmutableLinkedList implements ImmutableList {
 
     @Override
 
-    public String toString(){
+    public String toString() {
         return Arrays.toString(this.toArray());
     }
 

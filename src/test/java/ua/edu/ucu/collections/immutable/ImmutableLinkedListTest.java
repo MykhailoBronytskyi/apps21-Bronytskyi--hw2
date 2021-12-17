@@ -31,14 +31,22 @@ public class ImmutableLinkedListTest {
     }
     @Test
     public void testAdd() {
+        Object[] object = new Object[]{30, 20};
+
         linkedList = (ImmutableLinkedList) linkedList.add(10);
         assertEquals("[10, 1, 2, 3, 4, 5]", linkedList.toString());
 
-        linkedList = (ImmutableLinkedList) linkedList.addAll(new Object[]{30, 20});
+        linkedList = (ImmutableLinkedList) linkedList.addAll(object);
         assertEquals("[30, 20, 10, 1, 2, 3, 4, 5]", linkedList.toString());
 
+        linkedList = (ImmutableLinkedList) linkedList.addAll(-1,object);
+        assertEquals("[30, 20, 10, 1, 2, 3, 4, 5, 30, 20]", linkedList.toString());
+
+        linkedList = (ImmutableLinkedList) linkedList.addAll(linkedList.size() + 1, object);
+        assertEquals("[30, 20, 10, 1, 2, 3, 4, 5, 30, 20, 30, 20]", linkedList.toString());
+
         linkedList = (ImmutableLinkedList) linkedList.add(null);
-        assertEquals("[null, 30, 20, 10, 1, 2, 3, 4, 5]", linkedList.toString());
+        assertEquals("[null, 30, 20, 10, 1, 2, 3, 4, 5, 30, 20, 30, 20]", linkedList.toString());
     }
 
     @Test

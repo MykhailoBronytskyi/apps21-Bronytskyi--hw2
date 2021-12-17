@@ -1,9 +1,9 @@
 package ua.edu.ucu.collections.immutable;
 
 public class Node {
-    private Node previous;
-    private Node next;
-    private Object value;
+    private Node previous = null;
+    private Node next = null;
+    private Object value = null;
 
     public Node() {
     }
