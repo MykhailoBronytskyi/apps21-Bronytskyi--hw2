@@ -18,17 +18,7 @@ public class ImmutableLinkedListTest {
         linkedList = new ImmutableLinkedList(new Object[]{1, 2, 3, 4, 5});
         linkedEmptyList = new ImmutableLinkedList();
     }
-
-    @Test
-    public void testMyThoughts() {
-        Object[] obj = new Object[]{1,2,3};
-        System.out.println(Arrays.toString(obj));
-        System.out.println(linkedList.toString());
-        System.out.println(linkedList.getHead().getPrevious());
-        Object[] arr = new  Object[]{};
-        ImmutableLinkedList ne = new ImmutableLinkedList(arr);
-
-    }
+    
     @Test
     public void testAdd() {
         Object[] object = new Object[]{30, 20};
@@ -59,6 +49,8 @@ public class ImmutableLinkedListTest {
 
         linkedEmptyList = (ImmutableLinkedList) linkedEmptyList.add(null);
         assertEquals("[null, 30, 20, 10]", linkedEmptyList.toString());
+
+        linkedEmptyList = (ImmutableLinkedList) linkedEmptyList.addAll(-10,new Object[]{null});
     }
 
     @Test(expected = IllegalArgumentException.class)

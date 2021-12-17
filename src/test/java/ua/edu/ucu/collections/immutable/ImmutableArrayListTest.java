@@ -48,6 +48,10 @@ public class ImmutableArrayListTest {
 
         arrayEmptyList = (ImmutableArrayList) arrayEmptyList.addAll(100, new Object[]{5, 5, 5, 5, 5});
         Assert.assertEquals("[5, 5, 5, 5, 5]", arrayEmptyList.toString());
+
+        arrayEmptyList = (ImmutableArrayList) arrayEmptyList.addAll(-100, new Object[]{3});
+        Assert.assertEquals("[3, 5, 5, 5, 5, 5]", arrayEmptyList.toString());
+
     }
 
     @Test(expected = IllegalArgumentException.class)
